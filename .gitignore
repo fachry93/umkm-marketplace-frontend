@@ -1,0 +1,26 @@
+# ─── DEPENDENCIES ──────────────────────
+node_modules/
+
+# ─── ENVIRONMENT ────────────────────────
+.env
+.env.local
+.env.production
+
+# ─── IDE ────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ─── OS ────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── BUILD ──────────────────────────────
+dist/
+build/
+
+# ─── LOGS ──────────────────────────────
+*.log
+npm-debug.log*

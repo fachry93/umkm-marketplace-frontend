@@ -1,0 +1,25 @@
+{
+  "name": "Marketplace UMKM Wongsorejo",
+  "short_name": "UMKM Wongsrejo",
+  "description": "Marketplace produk UMKM desa Kecamatan Wongsorejo, Banyuwangi",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fafaf9",
+  "theme_color": "#16a34a",
+  "orientation": "portrait",
+  "lang": "id",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    {
+      "src": "/icons/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    { "src": "/screenshots/home.png", "sizes": "390x844", "type": "image/png", "form_factor": "narrow" }
+  ]
+}
