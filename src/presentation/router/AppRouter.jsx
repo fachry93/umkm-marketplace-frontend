@@ -1,5 +1,6 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
+import { NotFoundPage } from '../../components/ui/404-page-not-found';
 
 // Layouts
 import UserLayout from '../components/layout/UserLayout';
@@ -94,5 +95,9 @@ export const AppRouter = createBrowserRouter([
       { path: '/admin/qris', element: <QrisAdminPage /> },
       { path: '/admin/profil', element: <AdminProfilPage /> },
     ]
+  },
+  {
+    path: '*',
+    element: <NotFoundPage />
   }
 ]);
