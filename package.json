@@ -10,7 +10,10 @@
     "@fontsource/lora": "latest",
     "@fontsource/plus-jakarta-sans": "latest",
     "@headlessui/react": "^2.0.0",
+    "@radix-ui/react-slot": "^1.2.5",
     "axios": "^1.0.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "framer-motion": "^11.0.0",
     "lucide-react": "^0.383.0",
     "react": "^18.0.0",
@@ -19,7 +22,8 @@
     "react-intersection-observer": "^9.0.0",
     "react-router-dom": "^6.0.0",
     "react-scroll-parallax": "^3.0.0",
-    "swiper": "^11.0.0"
+    "swiper": "^11.0.0",
+    "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.0.0",
