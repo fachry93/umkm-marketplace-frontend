@@ -6,46 +6,26 @@ import { CategoryFilter } from '../../components/ui/CategoryFilter';
 import { UmkmCard } from '../../components/ui/UmkmCard';
 import { UmkmSkeleton } from '../../components/ui/UmkmSkeleton';
 import Pagination from '../../components/ui/Pagination';
-import { UmkmAPI } from '../../../data/repositories/UmkmAPI';
-import toast from 'react-hot-toast';
+import { useUmkm } from '../../hooks/useUmkm';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const ITEMS_PER_PAGE = 10;
-
 export default function UmkmListPage() {
-  const [umkmList, setUmkmList] = useState([]);
-  const [filteredList, setFilteredList] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { umkmList, fetchUmkm, isLoading, meta } = useUmkm();
+  const [page, setPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('Semua');
   const [showFilters, setShowFilters] = useState(false);
-  const [page, setPage] = useState(1);
 
   useEffect(() => {
-    fetchUmkm();
-  }, []);
+    fetchUmkm(page);
+  }, [page]);
 
-  useEffect(() => {
-    filterData();
-    setPage(1);
-  }, [searchQuery, selectedCategory, umkmList]);
-
-  const fetchUmkm = async () => {
-    try {
-      setLoading(true);
-      const res = await UmkmAPI.getAll();
-      if (res.success) {
-        setUmkmList(res.data || []);
-      }
-    } catch (err) {
-      console.error(err);
-      toast.error('Gagal memuat data UMKM');
-    } finally {
-      setLoading(false);
-    }
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const filterData = () => {
+  const filteredList = () => {
     let temp = [...umkmList];
     if (searchQuery.trim() !== '') {
       const q = searchQuery.toLowerCase();
@@ -58,14 +38,10 @@ export default function UmkmListPage() {
     if (selectedCategory !== 'Semua') {
       temp = temp.filter(u => u.kategori === selectedCategory);
     }
-    setFilteredList(temp);
+    return temp;
   };
 
-  // Paginate filtered results
-  const totalFiltered = filteredList.length;
-  const totalPages = Math.ceil(totalFiltered / ITEMS_PER_PAGE);
-  const paginatedItems = filteredList.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
-  const paginationMeta = { total: totalFiltered, page, limit: ITEMS_PER_PAGE };
+  const list = filteredList();
 
   return (
     <PageTransition>
@@ -91,7 +67,7 @@ export default function UmkmListPage() {
                   Kecamatan Wongsorejo.
                 </h1>
                 <p className="font-sans text-stone-400 text-lg leading-relaxed">
-                  Temukan lebih dari {umkmList.length} unit usaha lokal yang memproduksi barang berkualitas tinggi langsung dari jantung desa.
+                  Temukan lebih dari {meta.total} unit usaha lokal yang memproduksi barang berkualitas tinggi langsung dari jantung desa.
                 </p>
               </div>
 
@@ -133,11 +109,11 @@ export default function UmkmListPage() {
 
         {/* Content Section */}
         <div className="max-w-7xl mx-auto px-6 -mt-16 relative z-20">
-          {loading ? (
+          {isLoading ? (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[1, 2, 3, 4, 5, 6].map(i => <UmkmSkeleton key={i} />)}
             </div>
-          ) : filteredList.length === 0 ? (
+          ) : list.length === 0 ? (
             <div className="bg-white rounded-[3rem] border border-stone-100 p-20 text-center shadow-premium max-w-2xl mx-auto">
               <div className="w-20 h-20 bg-stone-50 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Store size={40} className="text-stone-200" />
@@ -148,13 +124,13 @@ export default function UmkmListPage() {
           ) : (
             <>
               <StaggerList className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {paginatedItems.map(umkm => (
+                {list.map(umkm => (
                   <StaggerItem key={umkm.id_umkm}>
                     <UmkmCard umkm={umkm} />
                   </StaggerItem>
                 ))}
               </StaggerList>
-              <Pagination meta={paginationMeta} onPageChange={(p) => { setPage(p); window.scrollTo({ top: 0, behavior: 'smooth' }); }} />
+              <Pagination meta={meta} onPageChange={handlePageChange} />
             </>
           )}
         </div>

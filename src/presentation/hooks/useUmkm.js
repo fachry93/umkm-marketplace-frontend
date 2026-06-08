@@ -12,9 +12,14 @@ export function useUmkm() {
     setIsLoading(true);
     try {
       const res = await UmkmAPI.getAll(page);
-      if (res.meta) {
-        setUmkmList(res.data || []);
-        setMeta(res.meta);
+      if (res.success) {
+        if (res.meta) {
+          setUmkmList(res.data || []);
+          setMeta(res.meta);
+        } else {
+          setUmkmList(res.data || []);
+          setMeta({ total: (res.data || []).length, page: 1, limit: 10 });
+        }
       } else {
         setUmkmList(res.data || res || []);
         setMeta({ total: (res.data || res || []).length, page: 1, limit: 10 });
@@ -39,5 +44,5 @@ export function useUmkm() {
     }
   };
 
-  return { umkmList, umkmDetail, isLoading, meta, fetchUmkm, fetchNews: fetchUmkm, fetchUmkmById };
+  return { umkmList, umkmDetail, isLoading, meta, fetchUmkm, fetchUmkmById };
 }
