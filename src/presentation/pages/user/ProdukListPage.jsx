@@ -85,6 +85,7 @@ export default function ProdukListPage() {
                   />
                 </div>
                 <motion.button 
+                  aria-label="Toggle Filter Kategori"
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setShowFilters(!showFilters)}
                   className={`w-12 h-12 flex items-center justify-center rounded-2xl border transition-all ${showFilters ? 'bg-primary-600 border-primary-600 text-white shadow-green' : 'bg-white border-stone-200 text-stone-600 hover:border-primary-500'}`}

@@ -26,7 +26,13 @@ export function UmkmCard({ umkm }) {
               <div className="w-16 h-16 rounded-2xl bg-white p-1 shadow-xl transform group-hover:rotate-3 transition-transform duration-500">
                 <div className="w-full h-full rounded-xl bg-stone-50 flex items-center justify-center overflow-hidden">
                   {umkm.logo
-                    ? <img src={umkm.logo} alt={umkm.nama_umkm} className="w-full h-full object-cover" />
+                    ? <img 
+                        src={umkm.logo} 
+                        alt={`Logo UMKM ${umkm.nama_umkm}`} 
+                        className="w-full h-full object-cover" 
+                        loading="lazy"
+                        decoding="async"
+                      />
                     : <span className="font-display text-2xl font-black text-primary-600">
                         {umkm.nama_umkm.charAt(0)}
                       </span>

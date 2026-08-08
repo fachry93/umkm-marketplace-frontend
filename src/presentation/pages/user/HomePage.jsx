@@ -31,8 +31,10 @@ function HeroSection() {
       <Parallax speed={-15} className="absolute inset-0 w-full h-full scale-110">
         <img
           src="/hero-bg.jpg"
-          alt="Produk UMKM Wongsorejo"
+          alt="Produk UMKM Wongsorejo — Kecamatan Wongsorejo, Banyuwangi"
           className="w-full h-full object-cover"
+          fetchpriority="high"
+          decoding="async"
         />
       </Parallax>
 

@@ -39,6 +39,17 @@ export default defineConfig({
       }
     })
   ],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+          'vendor-animation': ['framer-motion', 'react-scroll-parallax'],
+          'vendor-swiper': ['swiper'],
+        }
+      }
+    }
+  },
   server: {
     port: 5173,
     proxy: {

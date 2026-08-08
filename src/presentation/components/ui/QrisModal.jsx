@@ -23,7 +23,7 @@ export function QrisModal({ isOpen, onClose, qrisUrl }) {
             <div className="w-10 h-1 bg-stone-300 rounded-full mx-auto mb-5" />
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-display text-xl font-bold text-stone-900">Scan QR untuk Bayar</h3>
-              <button onClick={onClose} className="p-2 rounded-full hover:bg-stone-100"><X size={20} className="text-stone-500" /></button>
+              <button aria-label="Tutup Modal" onClick={onClose} className="p-2 rounded-full hover:bg-stone-100"><X size={20} className="text-stone-500" /></button>
             </div>
             <p className="font-sans text-stone-500 text-sm mb-5">Scan QR code berikut dengan aplikasi m-Banking atau e-wallet kamu. Setelah transfer, hubungi penjual untuk konfirmasi.</p>
             <div className="flex justify-center mb-6">

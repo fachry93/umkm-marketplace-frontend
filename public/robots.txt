@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://marketplace-umkm-wongsorejo.vercel.app/sitemap.xml
