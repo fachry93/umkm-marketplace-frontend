@@ -48,7 +48,9 @@ export default function ProdukAdminPage() {
         toast.error(res.message || 'Gagal menghapus produk');
       }
     } catch (err) {
-      toast.error('Gagal menghapus produk');
+      console.error(err);
+      const errMsg = err.response?.data?.message || 'Gagal menghapus produk';
+      toast.error(errMsg);
     }
   };
 

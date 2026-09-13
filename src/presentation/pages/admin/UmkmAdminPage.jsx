@@ -35,7 +35,7 @@ export default function UmkmAdminPage() {
   };
 
   const handleDelete = async (id, name) => {
-    if (window.confirm(`Apakah Anda yakin ingin menghapus UMKM "${name}"? Semua produk yang terhubung dengan UMKM ini juga akan ikut terpengaruh.`)) {
+    if (window.confirm(`Apakah Anda yakin ingin menghapus UMKM "${name}"? Pastikan semua produk milik UMKM ini sudah tidak ada atau telah dihapus terlebih dahulu.`)) {
       try {
         const res = await UmkmAPI.delete(id);
         if (res.success) {
@@ -44,7 +44,8 @@ export default function UmkmAdminPage() {
         }
       } catch (err) {
         console.error(err);
-        toast.error('Gagal menghapus UMKM');
+        const errMsg = err.response?.data?.message || 'Gagal menghapus UMKM';
+        toast.error(errMsg);
       }
     }
   };
